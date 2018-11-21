@@ -1,6 +1,8 @@
-FROM openjdk:8
+FROM centos:latest
 ENV PORT 8080
 EXPOSE 8080
+ADD sapjvm_8 /opt/sapjvm_8 
+RUN ln -s /opt/sapjvm_8/bin/java  /usr/bin/java
 COPY target/*.jar /opt/app.jar
 WORKDIR /opt
 CMD ["java", "-jar", "app.jar"]

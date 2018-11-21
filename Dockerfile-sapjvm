@@ -1,0 +1,11 @@
+FROM centos:latest
+ENV PORT 8080
+EXPOSE 8080
+ADD sapjvm-8.1.044-linux-x64.rpm  .
+RUN yum localinstall sapjvm-8.1.044-linux-x64.rpm -y && \
+    rm sapjvm-8.1.044-linux-x64.rpm && \
+    alternatives --install /usr/bin/java java /usr/java/sapjvm_8.1.044/bin/java 50 
+ENV JAVA_HOME /usr/java/latest    
+COPY target/*.jar /opt/app.jar
+WORKDIR /opt
+CMD ["java", "-jar", "app.jar"]

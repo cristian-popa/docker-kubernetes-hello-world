@@ -1,33 +1,36 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: hello-world
+  name: hello-world-oraclejvm
 spec:
   replicas: 1 
   template:
     metadata:
       labels:
-        app: hello-world
+        app: hello-world-oraclejvm
     spec:
       containers:
-      - name: hello-world-pod
+      - name: hello-world-pod-oraclejvm
         resources:
           limits:
-            cpu: "3"
+            cpu: "2.5"
           requests:
-            cpu: "2"
-        image: cristianpopa/cpucountjava:latest
+            cpu: "1"
+        image: cristianpopa/sapjvm:oracle
+       
         ports: 
         - containerPort: 80
         - containerPort: 443
+      imagePullSecrets:
+      - name: private-registry-key
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world-service
+  name: hello-world-service-oraclejvm
 spec:
   selector:
-    app: hello-world
+    app: hello-world-oraclejvm
   ports:
   - name: http
     protocol: TCP

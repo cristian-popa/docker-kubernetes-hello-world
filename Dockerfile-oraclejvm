@@ -1,0 +1,11 @@
+FROM centos:latest
+ENV PORT 8080
+EXPOSE 8080
+ADD jdk-8u191-linux-x64.rpm  .
+RUN yum localinstall jdk-8u191-linux-x64.rpm -y && \
+    rm jdk-8u191-linux-x64.rpm && \
+    alternatives --install /usr/bin/java java /usr/java/default/bin/java 50 
+ENV JAVA_HOME /usr/java/latest    
+COPY target/*.jar /opt/app.jar
+WORKDIR /opt
+CMD ["java", "-jar", "app.jar"]
