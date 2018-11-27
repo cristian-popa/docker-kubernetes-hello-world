@@ -1,10 +1,7 @@
 = Hello World with Docker and Kubernetes
 
-This repo consists of a Spring Boot Hello World application. It shows:
-
-. Run & test the application from CLI
-. Create a Docker image, run the container and test it
-. Create Kubernetes deployment and test it
+This repo forks the Spring Boot Hello World application from arun-gupta/docker-kubernetes-hello-world . 
+It simply extends the hello world to display the java version and how many CPUs the java container has at it's disposal for different java vendors. You'll need to supply your own jvms for non publicly redistributable containers such as Oracle JVM and SAP Jvm and you'd also need to modify the Dockerfiles for those files. 
 
 Let's get started!
 
@@ -33,19 +30,19 @@ mvn clean package
 === Build Docker Image
 
 ```
-docker image build -t arungupta/helloworld-spring-boot:latest .
+docker image build -t cristianpopa/helloworld-spring-boot:latest .
 ```
 
 === Push Docker Image
 
 ```
-docker image push arungupta/helloworld-spring-boot:latest
+docker image push cristianpopa/helloworld-spring-boot:latest
 ```
 
 === Run Docker Container
 
 ```
-docker container run -d --name hello-world -p 8080:8080 arungupta/helloworld-spring-boot:latest
+docker container run -d --name hello-world -p 8080:8080 cristianpopa/helloworld-spring-boot:latest
 ```
 
 === Test Application
